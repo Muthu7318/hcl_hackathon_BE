@@ -4,7 +4,7 @@ exports.addStaff = async (req, res) => {
   try {
     const { name, staffId, role, shiftPreference, contactNumber } = req.body;
 
-    if (!name || !staffId || !role || !shiftPreference || !contactNumber) {
+    if (!name || !role || !shiftPreference || !contactNumber) {
       return res.status(400).json({ message: "All fields are required." });
     }
 

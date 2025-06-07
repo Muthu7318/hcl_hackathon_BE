@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
 const staffSchema = new mongoose.Schema(
   {
+    staffId: {
+      type: mongoose.Schema.Types.ObjectId,
+
+      unique: true,
+      trim: true,
+    },
     name: {
       type: String,
       required: true,
-      trim: true,
-    },
-    staffId: {
-      type: String,
-      required: true,
-      unique: true,
       trim: true,
     },
     role: {
