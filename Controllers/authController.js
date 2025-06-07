@@ -3,18 +3,14 @@ const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const jwt = require("jsonwebtoken");
 
-const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_secret, {
-    expiresIn: "1h",
-  });
-
-exports.login = catchAsync(async (req, res, next) => {
-  console.log("---login controller");
-  console.log("body req", req.body);
+exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new AppError("Please provide email and password", 400));
+    return res.status(400).json({
+      status: "Failure",
+      message: "email or password is not present",
+    });
   }
 
   const user = await User.findOne({ email }).select("+password");
@@ -24,7 +20,7 @@ exports.login = catchAsync(async (req, res, next) => {
     token: jwt.sign(user.email, "mysecrettoken"),
     user: user.email,
   });
-});
+};
 
 exports.logout = (req, res) => {
   res.cookie("jwt", "logged out", {

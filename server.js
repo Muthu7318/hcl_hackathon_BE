@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const userRouter = require("./Routes/UserRoutes");
 const staffRouter = require("./Routes/StaffRoutes");
 const dotenv = require("dotenv");
-const Staff = require("./Models/staff");
+const authMiddleware = require("./middleware/authmiddleware");
 
 dotenv.config({ path: "./.env" });
 
@@ -28,6 +28,9 @@ app.use(
   })
 );
 app.use("/api/v1/users", userRouter);
+
+app.use(authMiddleware);
+
 app.use("/api/v1/staff", staffRouter);
 
 const port = 8000;
