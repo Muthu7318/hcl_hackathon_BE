@@ -1,5 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const userRouter = require("./Routes/UserRoutes");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 async function connectToMongoDB() {
   try {
@@ -15,6 +19,13 @@ async function connectToMongoDB() {
 connectToMongoDB();
 
 const app = express();
+
+app.use(
+  express.json({
+    limit: "10kb",
+  })
+);
+app.use("/api/v1/users", userRouter);
 
 const port = 8000;
 
