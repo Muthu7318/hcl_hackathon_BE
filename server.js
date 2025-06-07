@@ -5,6 +5,7 @@ const shiftRouter = require("./Routes/ShiftRouter");
 const staffRouter = require("./Routes/StaffRoutes");
 const dotenv = require("dotenv");
 const Staff = require("./Models/staff");
+const cors = require("cors");
 
 dotenv.config({ path: "./.env" });
 
@@ -28,6 +29,7 @@ app.use(
     limit: "10kb",
   })
 );
+app.use(cors()); // Enable CORS for all routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/shifts", shiftRouter); // Assuming you want to use the same router for shifts
 app.use("/api/v1/staff", staffRouter);
