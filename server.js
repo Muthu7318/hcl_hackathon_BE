@@ -4,6 +4,8 @@ const userRouter = require("./Routes/UserRoutes");
 const shiftRouter = require("./Routes/ShiftRouter");
 const staffRouter = require("./Routes/StaffRoutes");
 const dotenv = require("dotenv");
+const Staff = require("./Models/staff");
+const cors = require("cors");
 const authMiddleware = require("./middleware/authmiddleware");
 
 dotenv.config({ path: "./.env" });
@@ -28,6 +30,7 @@ app.use(
     limit: "10kb",
   })
 );
+app.use(cors()); // Enable CORS for all routes
 app.use("/api/v1/users", userRouter);
 
 app.use(authMiddleware);

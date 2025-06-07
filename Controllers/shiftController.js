@@ -38,6 +38,7 @@ exports.createShift = catchAsync(async (req, res, next) => {
       status: "failure",
       data: "Shift already exists for this staff on this date",
     });
+    return;
   }
   const newShift = await Shift.create({
     staffId,
