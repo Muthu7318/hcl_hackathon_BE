@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./Routes/UserRoutes");
+const shiftRouter = require("./Routes/ShiftRouter");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./.env" });
@@ -26,6 +27,7 @@ app.use(
   })
 );
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/shifts", shiftRouter); // Assuming you want to use the same router for shifts
 
 const port = 8000;
 
